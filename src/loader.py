@@ -49,6 +49,8 @@ def construct_user_dict(requests: list[TrackRequest]) -> dict[str, list[str]]:
 def save_request_list(trackList: list[TrackRequest]):
     json_obj = []
     for request in trackList:
+        if len(request.userIds) == 0:
+            continue
         json_obj.append({
             'crn': request.crn,
             'term': request.term,
