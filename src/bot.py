@@ -30,11 +30,12 @@ async def info(ctx: commands.Context, *crns):
     courses = []
     def fetch_info(crn):
         courses.append(Course(crn, "202502"))
-    threads = [threading.Thread(target=fetch_info,args=(crn,)) for crn in crns]
+    threads = [threading.Thread(target=fetch_info,args=(crn,)) for crn in crns if crn not in request_dict]
     for t in threads:
         t.start()
     for t in threads:
         t.join()
+    courses += [request_dict[crn].course for crn in crns if crn in request_dict]
     successfulCourses = []
     failedCrns = []
     for course in courses:
