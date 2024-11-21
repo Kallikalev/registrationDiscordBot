@@ -36,7 +36,7 @@ def construct_request_dict(requests: list[TrackRequest]) -> dict[str, TrackReque
         mapping[request.crn] = request
     return mapping
 
-def construct_user_dict(requests: list[TrackRequest]) -> dict[str, list[str]]:
+def construct_user_dict(requests: list[TrackRequest]) -> dict[int, list[str]]:
     mapping = {}
     for request in requests:
         for userId in request.userIds:
