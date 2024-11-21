@@ -39,7 +39,7 @@ async def info(ctx: commands.Context, *crns):
     successfulCourses = []
     failedCrns = []
     for course in courses:
-        if course.data['seats'] == -1:
+        if not course.exists():
             failedCrns.append(course.crn)
         else:
             successfulCourses.append(f"```\n{str(course)}```")
@@ -80,17 +80,18 @@ async def track(ctx: commands.Context, *crns):
             else:
                 user_dict[ctx.author.id] = [crn]
             return
-        newRequest = TrackRequest(crn,"202502",[ctx.author.id],[ctx.channel.id])
-        if newRequest.course.data['seats'] == -1:
-            failedCrns.append(crn)
         else:
-            global_request_list.append(newRequest)
-            request_dict[crn] = newRequest
-            successCrns.append(crn)
-            if ctx.author.id in user_dict:
-                user_dict[ctx.author.id].append(crn)
+            newRequest = TrackRequest(crn,"202502",[ctx.author.id],[ctx.channel.id])
+            if newRequest.course.exists():
+                global_request_list.append(newRequest)
+                request_dict[crn] = newRequest
+                successCrns.append(crn)
+                if ctx.author.id in user_dict:
+                    user_dict[ctx.author.id].append(crn)
+                else:
+                    user_dict[ctx.author.id] = [crn]
             else:
-                user_dict[ctx.author.id] = [crn]
+                failedCrns.append(crn)
     threads = [threading.Thread(target=attempt_track,args=(crn,)) for crn in crns]
     for t in threads:
         t.start()

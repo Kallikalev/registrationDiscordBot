@@ -67,6 +67,9 @@ class Course:
     def waitlist_available(self) -> bool:
         return self.data['waitlist']['vacant'] > 0
 
+    def exists(self) -> bool:
+        return self.data['vacant'] != -1
+
     def __str__(self) -> str:
         res = "{}\n".format(self.name)
         for name in self.data:
