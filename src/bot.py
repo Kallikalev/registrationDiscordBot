@@ -29,7 +29,7 @@ async def info(ctx: commands.Context, *crns):
     crns = list(dict.fromkeys(crns)) #de-duplicate
     courses = []
     def fetch_info(crn):
-        courses.append(Course(crn, "202502"))
+        courses.append(Course(crn, "202508"))
     threads = [threading.Thread(target=fetch_info,args=(crn,)) for crn in crns if crn not in request_dict]
     for t in threads:
         t.start()
