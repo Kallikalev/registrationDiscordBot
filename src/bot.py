@@ -81,7 +81,7 @@ async def track(ctx: commands.Context, *crns):
                 user_dict[ctx.author.id] = [crn]
             return
         else:
-            newRequest = TrackRequest(crn,"202502",[ctx.author.id],[ctx.channel.id])
+            newRequest = TrackRequest(crn,"202508",[ctx.author.id],[ctx.channel.id])
             if newRequest.course.exists():
                 global_request_list.append(newRequest)
                 request_dict[crn] = newRequest
