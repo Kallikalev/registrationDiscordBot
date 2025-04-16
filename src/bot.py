@@ -197,9 +197,6 @@ async def check_crn():
     messages = []
     for request in global_request_list:
         if request.statusChanged:
-            if request.course.data['seats'] == -1:
-                print("Got DNE for CRN " + str(request.course.crn))
-                continue
             channels = {}
             for i in range(len(request.userIds)):
                 userId = request.userIds[i]

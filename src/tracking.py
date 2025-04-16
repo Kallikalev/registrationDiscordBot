@@ -27,7 +27,12 @@ class TrackRequest:
 
     # return True if status changed
     def fetch(self) -> bool:
-        self.course = Course(self.crn, self.term)
+        newCourse = Course(self.crn, self.term)
+        if newCourse.data['seats'] == -1:
+            print("Got DNE for CRN" + str(self.crn))
+            self.statusChanged = False
+            return False
+        self.course = newCourse
         oldStatus = self.status
         if self.course.is_open():
             self.status = TrackStatus.CLASS_OPEN
