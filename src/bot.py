@@ -179,6 +179,7 @@ async def help(ctx: commands.Context):
     Commands:
         `$help`: Displays all commands.
         `$info CRN1 CRN2 ...` Displays info about one or more CRNs.
+        `$info all` Displays info about all CRNs you are tracking.
         `$track CRN1 CRN2 ...` Adds one or more CRNs to be tracked. User will be pinged when the status changes.
         `$untrack CRN1 CRN2 ...` Removes one or more CRNs from your tracking list.
         `$untrack all` Removes all CRNs from your tracking list.
