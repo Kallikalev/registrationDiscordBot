@@ -27,6 +27,8 @@ async def info(ctx: commands.Context, *crns):
         await ctx.reply(f"Error: Please specify at least one CRN", mention_author=False)
         return
     crns = list(dict.fromkeys(crns)) #de-duplicate
+    if crns[0] == "all":
+        crns = user_dict[ctx.author.id][:]
     courses = []
     def fetch_info(crn):
         courses.append(Course(crn, "202508"))
